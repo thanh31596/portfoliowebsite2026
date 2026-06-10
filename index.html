@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephen Kim — AI Engineer & Data Scientist</title>
+<meta name="description" content="Stephen Kim — AI Engineer / Data Scientist in Brisbane. Builder of production AI: AgentEval with Microsoft Research, TFT forecasting, RAG, agentic pipelines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — "MISSION CONTROL"
+   Void     #060B14   near-black navy (page)
+   Glass    rgba(13,24,40,.55)  translucent panels
+   Circuit  #38E1FF   cyan — structure, links, the system
+   Signal   #FFB454   amber — value delivered, impact numbers
+   Paper    #E8F1F8   primary text
+   Dim      #93A7BC   secondary text
+   ============================================================ */
+:root{
+  --void:#060B14;
+  --glass:rgba(13,24,40,.55);
+  --glass-solid:#0C1626;
+  --circuit:#38E1FF;
+  --circuit-dim:rgba(56,225,255,.32);
+  --circuit-faint:rgba(56,225,255,.12);
+  --signal:#FFB454;
+  --signal-soft:rgba(255,180,84,.13);
+  --paper:#E8F1F8;
+  --dim:#93A7BC;
+  --radius:12px;
+  --maxw:1100px;
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'IBM Plex Sans',sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);
+  color:var(--paper);
+  font-family:var(--font-body);
+  font-size:16.5px;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+/* ambient glows */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(640px 420px at 12% -4%, rgba(56,225,255,.10), transparent 60%),
+    radial-gradient(720px 480px at 96% 104%, rgba(255,180,84,.07), transparent 60%);
+}
+#net{position:fixed;inset:0;z-index:-1;pointer-events:none}
+::selection{background:var(--circuit);color:var(--void)}
+a{color:var(--circuit);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--circuit);outline-offset:3px;border-radius:4px}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(6,11,20,.72);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--circuit-faint);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{font-family:var(--font-mono);font-size:.95rem;color:var(--paper);letter-spacing:.04em}
+.brand b{color:var(--circuit)}
+.brand .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3EE08A;margin-right:9px;box-shadow:0 0 8px #3EE08A;animation:blink 2.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+nav ul{display:flex;gap:24px;list-style:none}
+nav a{font-family:var(--font-mono);font-size:.78rem;color:var(--dim);letter-spacing:.07em;text-transform:uppercase;transition:color .15s,text-shadow .15s}
+nav a:hover{color:var(--circuit);text-decoration:none;text-shadow:0 0 12px var(--circuit-dim)}
+@media(max-width:760px){nav ul{display:none}}
+
+/* ---------- figure labels ---------- */
+.fig{
+  font-family:var(--font-mono);font-size:.76rem;letter-spacing:.16em;
+  color:var(--circuit);text-transform:uppercase;
+  display:flex;align-items:center;gap:14px;margin-bottom:18px;
+}
+.fig::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--circuit-dim),transparent)}
+
+section{padding:88px 0;position:relative}
+h2.section-title{font-family:var(--font-display);font-size:clamp(1.5rem,3.4vw,2.15rem);font-weight:700;margin-bottom:32px;letter-spacing:-.01em}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- hero ---------- */
+.hero{padding:88px 0 64px;min-height:78vh;display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:52px;align-items:center;width:100%}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr}}
+.boot{font-family:var(--font-mono);font-size:.85rem;color:var(--circuit);min-height:1.4em;letter-spacing:.03em}
+.boot .cursor{display:inline-block;width:9px;height:1.05em;background:var(--circuit);vertical-align:text-bottom;margin-left:2px;animation:blink 1s infinite}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.7rem,6.4vw,4.6rem);
+  font-weight:700;line-height:1.02;letter-spacing:-.02em;
+  margin-top:16px;
+  background:linear-gradient(110deg,var(--paper) 20%,var(--circuit) 48%,var(--signal) 78%,var(--paper) 100%);
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:sweep 7s linear infinite;
+}
+@keyframes sweep{0%{background-position:0% 50%}100%{background-position:220% 50%}}
+.typeline{
+  font-family:var(--font-mono);font-size:clamp(.95rem,2vw,1.15rem);
+  color:var(--dim);margin-top:18px;min-height:1.6em;
+}
+.typeline b{color:var(--paper);font-weight:500}
+.typeline .cursor{display:inline-block;width:9px;height:1.1em;background:var(--signal);vertical-align:text-bottom;margin-left:3px;animation:blink .9s infinite}
+.hero p.lede{color:var(--dim);max-width:56ch;margin-top:18px;font-size:.99rem}
+.sys{
+  font-family:var(--font-mono);font-size:.72rem;color:var(--dim);
+  letter-spacing:.1em;margin-top:22px;display:flex;gap:18px;flex-wrap:wrap;
+}
+.sys b{color:var(--circuit);font-weight:500}
+.sys .amber{color:var(--signal)}
+.cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.btn{
+  font-family:var(--font-mono);font-size:.85rem;letter-spacing:.04em;
+  padding:13px 24px;border-radius:9px;border:1px solid var(--circuit);
+  transition:transform .15s ease,background .15s ease,box-shadow .15s ease;
+  display:inline-block;
+}
+.btn:hover{transform:translateY(-2px);text-decoration:none;box-shadow:0 0 24px var(--circuit-dim)}
+.btn.primary{background:var(--circuit);color:var(--void);font-weight:500;border-color:var(--circuit)}
+.btn.primary:hover{background:#6FEAFF}
+.btn.ghost{color:var(--circuit)}
+.btn.ghost:hover{background:var(--circuit-faint)}
+.btn.amber{border-color:var(--signal);color:var(--signal)}
+.btn.amber:hover{background:var(--signal-soft);box-shadow:0 0 24px rgba(255,180,84,.25)}
+
+/* portrait */
+.portrait{
+  justify-self:center;
+  width:min(290px,72vw);aspect-ratio:4/5;
+  border:1px solid var(--circuit-dim);border-radius:var(--radius);
+  background:var(--glass);backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;
+  box-shadow:0 0 50px rgba(56,225,255,.10), inset 0 0 30px rgba(56,225,255,.04);
+}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
+.portrait .ph{
+  position:absolute;inset:12px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;text-align:center;
+  border:1.5px dashed var(--circuit-dim);border-radius:9px;padding:18px;
+}
+.portrait .ph span{font-family:var(--font-mono);font-size:.73rem;color:var(--dim);letter-spacing:.08em;line-height:1.9}
+.portrait .ph .glyph{font-size:2rem;color:var(--circuit);text-shadow:0 0 18px var(--circuit-dim)}
+.corner{position:absolute;width:18px;height:18px;border-color:var(--circuit);border-style:solid;z-index:2}
+.corner.tl{top:8px;left:8px;border-width:2px 0 0 2px}
+.corner.tr{top:8px;right:8px;border-width:2px 2px 0 0}
+.corner.bl{bottom:8px;left:8px;border-width:0 0 2px 2px}
+.corner.br{bottom:8px;right:8px;border-width:0 2px 2px 0}
+
+/* ---------- pipeline (signature) ---------- */
+.pipeline{
+  margin-top:70px;border:1px solid var(--circuit-faint);border-radius:var(--radius);
+  background:var(--glass);backdrop-filter:blur(10px);
+  padding:26px 22px 18px;overflow-x:auto;
+}
+.pipeline-title{font-family:var(--font-mono);font-size:.72rem;color:var(--dim);
+  letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
+.pipeline-title b{color:var(--circuit)}
+.pipe-row{display:flex;align-items:stretch;gap:0;min-width:760px}
+.pipe-node{
+  flex:1;border:1px solid var(--circuit-dim);border-radius:10px;
+  padding:14px 16px;background:rgba(8,16,30,.7);position:relative;
+  transition:border-color .2s,box-shadow .2s;
+}
+.pipe-node:hover{border-color:var(--circuit);box-shadow:0 0 20px var(--circuit-faint)}
+.pipe-node h4{font-family:var(--font-mono);font-size:.8rem;color:var(--paper);font-weight:500;letter-spacing:.03em}
+.pipe-node small{display:block;font-family:var(--font-mono);font-size:.67rem;color:var(--dim);margin-top:6px;line-height:1.55}
+.pipe-link{display:flex;align-items:center;padding:0 3px}
+.pipe-link svg{display:block;overflow:visible}
+.pipe-link .dash{stroke:var(--circuit-dim);stroke-width:1.4;stroke-dasharray:5 5;animation:march 1.4s linear infinite}
+.pipe-link .pulse{filter:drop-shadow(0 0 5px var(--circuit))}
+@keyframes march{to{stroke-dashoffset:-20}}
+.pipe-node.terminal{border-color:var(--signal);background:var(--signal-soft);box-shadow:0 0 26px rgba(255,180,84,.12)}
+.pipe-node.terminal h4{color:var(--signal)}
+
+/* ---------- impact ---------- */
+.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:18px}
+.impact-card{
+  border:1px solid var(--circuit-faint);border-radius:var(--radius);
+  background:var(--glass);backdrop-filter:blur(10px);
+  padding:26px 22px;position:relative;overflow:hidden;
+  transition:border-color .2s,box-shadow .2s,transform .15s;
+  will-change:transform;
+}
+.impact-card::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--signal),transparent);
+  opacity:0;transition:opacity .25s;
+}
+.impact-card:hover{border-color:rgba(255,180,84,.5);box-shadow:0 8px 38px rgba(255,180,84,.10)}
+.impact-card:hover::after{opacity:1}
+.impact-card .num{
+  font-family:var(--font-display);font-size:2.15rem;font-weight:700;color:var(--signal);
+  line-height:1.1;letter-spacing:-.01em;text-shadow:0 0 26px rgba(255,180,84,.3);
+  font-variant-numeric:tabular-nums;
+}
+.impact-card .what{font-family:var(--font-mono);font-size:.7rem;color:var(--dim);
+  text-transform:uppercase;letter-spacing:.12em;margin-top:9px}
+.impact-card p{font-size:.91rem;color:var(--dim);margin-top:10px;line-height:1.55}
+
+/* ---------- experience ---------- */
+.xp{border-left:1px solid var(--circuit-dim);margin-left:8px;padding-left:36px;display:flex;flex-direction:column;gap:40px;position:relative}
+.xp::before{content:"";position:absolute;left:-1px;top:0;width:1px;height:90px;background:linear-gradient(180deg,var(--circuit),transparent)}
+.xp-item{position:relative}
+.xp-item::before{
+  content:"";position:absolute;left:-42px;top:8px;width:10px;height:10px;border-radius:50%;
+  background:var(--void);border:2px solid var(--circuit);box-shadow:0 0 12px var(--circuit-dim);
+}
+.xp-item .when{font-family:var(--font-mono);font-size:.73rem;color:var(--circuit);letter-spacing:.1em}
+.xp-item h3{font-family:var(--font-display);font-size:1.2rem;font-weight:600;margin-top:6px}
+.xp-item .org{color:var(--signal);font-size:.94rem;margin-top:2px;font-family:var(--font-mono)}
+.xp-item ul{margin:10px 0 0 18px;color:var(--dim);font-size:.95rem;display:flex;flex-direction:column;gap:6px}
+.xp-item li::marker{color:var(--circuit)}
+.xp-item b{color:var(--paper)}
+
+/* ---------- skills ---------- */
+.skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:20px}
+.skill-group{
+  border:1px solid var(--circuit-faint);border-radius:var(--radius);
+  background:var(--glass);backdrop-filter:blur(10px);padding:24px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.skill-group:hover{border-color:var(--circuit-dim);box-shadow:0 0 26px rgba(56,225,255,.06)}
+.skill-group h4{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--circuit);margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-family:var(--font-mono);font-size:.73rem;color:var(--dim);
+  border:1px solid var(--circuit-faint);border-radius:999px;padding:5px 13px;letter-spacing:.02em;
+  transition:color .15s,border-color .15s,box-shadow .15s;cursor:default;
+}
+.chip:hover{color:var(--circuit);border-color:var(--circuit-dim);box-shadow:0 0 12px var(--circuit-faint)}
+.chip.hot{border-color:rgba(255,180,84,.45);color:var(--signal)}
+.chip.hot:hover{box-shadow:0 0 14px rgba(255,180,84,.2)}
+
+/* ---------- project ---------- */
+.project-card{
+  border:1px solid var(--circuit-faint);border-radius:var(--radius);
+  background:var(--glass);backdrop-filter:blur(10px);overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+@media(max-width:840px){.project-card{grid-template-columns:1fr}}
+.project-copy{padding:36px 34px}
+.project-copy h3{font-family:var(--font-display);font-size:1.55rem;font-weight:600}
+.project-copy .tag{font-family:var(--font-mono);font-size:.71rem;color:var(--signal);letter-spacing:.14em;text-transform:uppercase}
+.project-copy p{color:var(--dim);margin-top:14px;font-size:.97rem}
+.project-copy ul{margin:16px 0 0 18px;color:var(--dim);font-size:.93rem;display:flex;flex-direction:column;gap:7px}
+.project-copy li::marker{color:var(--circuit)}
+.project-copy b{color:var(--paper)}
+.project-media{display:flex;flex-direction:column;border-left:1px solid var(--circuit-faint)}
+@media(max-width:840px){.project-media{border-left:none;border-top:1px solid var(--circuit-faint)}}
+.media-slot{flex:1;min-height:230px;position:relative;background:#081020}
+.media-slot+.media-slot{border-top:1px solid var(--circuit-faint)}
+.media-slot img,.media-slot iframe{width:100%;height:100%;object-fit:cover;display:block;border:0;position:absolute;inset:0}
+.media-ph{
+  position:absolute;inset:12px;border:1.5px dashed var(--circuit-dim);border-radius:9px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px;
+  overflow:hidden;
+}
+.media-ph::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(56,225,255,.045) 0 2px,transparent 2px 4px);
+}
+.media-ph .nosignal{
+  font-family:var(--font-mono);font-size:.92rem;color:var(--circuit);letter-spacing:.28em;
+  text-shadow:0 0 14px var(--circuit-dim);animation:flicker 3.6s infinite;
+}
+@keyframes flicker{0%,91%,100%{opacity:1}92%{opacity:.35}94%{opacity:.85}96%{opacity:.45}98%{opacity:.9}}
+.media-ph span{font-family:var(--font-mono);font-size:.7rem;color:var(--dim);letter-spacing:.08em;line-height:1.9}
+
+/* ---------- publications ---------- */
+.pub{
+  border:1px solid var(--circuit-faint);border-left:3px solid var(--signal);border-radius:10px;
+  background:var(--glass);backdrop-filter:blur(10px);padding:24px 26px;margin-bottom:16px;
+  transition:box-shadow .2s,border-color .2s;
+}
+.pub:hover{box-shadow:0 6px 30px rgba(255,180,84,.08);border-color:rgba(255,180,84,.4)}
+.pub .meta{font-family:var(--font-mono);font-size:.7rem;color:var(--dim);letter-spacing:.07em}
+.pub h4{font-family:var(--font-display);font-size:1.07rem;font-weight:600;margin-top:8px}
+.pub p{font-size:.9rem;color:var(--dim);margin-top:6px}
+
+/* ---------- education ---------- */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:740px){.edu-grid{grid-template-columns:1fr}}
+.edu-card{
+  border:1px solid var(--circuit-faint);border-radius:var(--radius);
+  background:var(--glass);backdrop-filter:blur(10px);padding:26px;
+}
+.edu-card .when{font-family:var(--font-mono);font-size:.71rem;color:var(--circuit);letter-spacing:.1em}
+.edu-card h4{font-family:var(--font-display);font-size:1.1rem;font-weight:600;margin-top:6px}
+.edu-card p{font-size:.92rem;color:var(--dim);margin-top:8px}
+.award{display:flex;gap:12px;align-items:flex-start;margin-top:14px}
+.award .medal{color:var(--signal);font-size:.85rem;padding-top:2px;text-shadow:0 0 10px rgba(255,180,84,.5)}
+.award p{margin:0;font-size:.92rem;color:var(--dim)}
+.award b{color:var(--paper)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--circuit-faint);padding:64px 0 56px;text-align:center;position:relative}
+footer h2{
+  font-family:var(--font-display);font-size:clamp(1.8rem,4.4vw,2.6rem);font-weight:700;letter-spacing:-.01em;
+  background:linear-gradient(110deg,var(--paper),var(--circuit) 60%,var(--signal));
+  background-size:200%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;animation:sweep 7s linear infinite;
+}
+footer p{color:var(--dim);margin-top:12px}
+.foot-links{display:flex;gap:14px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.statusbar{
+  margin-top:48px;display:inline-flex;gap:20px;flex-wrap:wrap;justify-content:center;
+  font-family:var(--font-mono);font-size:.68rem;color:var(--dim);letter-spacing:.12em;
+  border:1px solid var(--circuit-faint);border-radius:999px;padding:9px 22px;background:var(--glass);
+}
+.statusbar b{color:var(--circuit);font-weight:500}
+.statusbar .ok{color:#3EE08A}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero h1,footer h2{animation:none}
+  .pipe-link .dash{animation:none}
+  .pipe-link .pulse{display:none}
+  .media-ph .nosignal{animation:none}
+  .brand .dot{animation:none}
+  .boot .cursor,.typeline .cursor{animation:none}
+  .btn:hover,.impact-card{transform:none!important}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="net" aria-hidden="true"></canvas>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot"></span>stephen<b>.kim</b> <span style="color:var(--dim)">// brisbane, au</span></div>
+    <nav>
+      <ul>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#project">Project</a></li>
+        <li><a href="#publications">Papers</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="boot"><span id="boot-text"></span><span class="cursor"></span></div>
+        <h1>Stephen Kim</h1>
+        <div class="typeline">I build <b id="typer"></b><span class="cursor"></span></div>
+        <p class="lede">
+          Five years taking machine learning and generative AI from idea to production —
+          evaluation frameworks with Microsoft Research, forecasting that saved a manufacturer
+          A$1.2M, RAG applications used daily by 500+ people, and agentic pipelines that
+          create video content end-to-end.
+        </p>
+        <div class="sys">
+          <span>SYS.STATUS <b>ONLINE</b></span>
+          <span>PAPERS <b>2</b></span>
+          <span>SAVED <span class="amber">A$1.2M</span></span>
+          <span>UPTIME <b>99.9%</b></span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="mailto:thanh31596000@gmail.com">Get in touch</a>
+          <a class="btn ghost" href="https://github.com/thanh31596" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- PHOTO: sửa CONFIG ở cuối file -->
+      <div class="portrait" id="portrait">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <div class="ph" id="portrait-ph">
+          <span class="glyph">⌖</span>
+          <span>PORTRAIT FEED OFFLINE<br>— set CONFIG.profilePhoto —</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- signature: live pipeline schematic -->
+    <div class="pipeline reveal" aria-label="Schematic of systems Stephen has shipped">
+      <div class="pipeline-title">FIG. 01 — <b>LIVE</b> · systems designed &amp; shipped to production</div>
+      <div class="pipe-row">
+        <div class="pipe-node">
+          <h4>AgentEval</h4>
+          <small>GenAI agent evaluation<br>w/ Microsoft Research · +20% vs G-Eval</small>
+        </div>
+        <div class="pipe-link"><svg width="36" height="20"><line class="dash" x1="0" y1="10" x2="36" y2="10"/><circle class="pulse" r="2.6" fill="#38E1FF"><animateMotion dur="1.6s" repeatCount="indefinite" path="M0,10 L36,10"/></circle></svg></div>
+        <div class="pipe-node">
+          <h4>TFT Forecaster</h4>
+          <small>Steel-price prediction · GVTL<br>~A$1.2M saved over 5 yrs</small>
+        </div>
+        <div class="pipe-link"><svg width="36" height="20"><line class="dash" x1="0" y1="10" x2="36" y2="10"/><circle class="pulse" r="2.6" fill="#38E1FF"><animateMotion dur="1.6s" begin="0.4s" repeatCount="indefinite" path="M0,10 L36,10"/></circle></svg></div>
+        <div class="pipe-node">
+          <h4>RAG Text-to-SQL</h4>
+          <small>LangChain · Azure<br>−40% query time · 500+ users</small>
+        </div>
+        <div class="pipe-link"><svg width="36" height="20"><line class="dash" x1="0" y1="10" x2="36" y2="10"/><circle class="pulse" r="2.6" fill="#38E1FF"><animateMotion dur="1.6s" begin="0.8s" repeatCount="indefinite" path="M0,10 L36,10"/></circle></svg></div>
+        <div class="pipe-node">
+          <h4>Video Pipeline</h4>
+          <small>Agentic AI · LLM scripts,<br>voice synthesis, animation</small>
+        </div>
+        <div class="pipe-link"><svg width="36" height="20"><line class="dash" x1="0" y1="10" x2="36" y2="10"/><circle class="pulse" r="2.6" fill="#FFB454"><animateMotion dur="1.6s" begin="1.2s" repeatCount="indefinite" path="M0,10 L36,10"/></circle></svg></div>
+        <div class="pipe-node terminal">
+          <h4>PRODUCTION</h4>
+          <small>Monitored · evaluated ·<br>used in the real world</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IMPACT ================= -->
+<section id="impact">
+  <div class="wrap">
+    <div class="fig reveal">FIG. 02 — SELECTED IMPACT</div>
+    <h2 class="section-title reveal">Numbers that held up in the real world</h2>
+    <div class="impact-grid">
+      <div class="impact-card tilt reveal">
+        <div class="num count" data-val="1.2" data-decimals="1" data-prefix="A$" data-suffix="M">A$0.0M</div>
+        <div class="what">Cost savings · GVTL</div>
+        <p>Inventory pipeline + Temporal Fusion Transformer steel-price forecasting for a Vietnamese manufacturer, across five years of live operation.</p>
+      </div>
+      <div class="impact-card tilt reveal">
+        <div class="num count" data-val="20" data-prefix="+" data-suffix="%">+0%</div>
+        <div class="what">vs Google G-Eval</div>
+        <p>AgentEval, co-developed with Microsoft Research at Telstra — a production evaluation framework for non-deterministic AI agents.</p>
+      </div>
+      <div class="impact-card tilt reveal">
+        <div class="num count" data-val="40" data-prefix="−" data-suffix="%">−0%</div>
+        <div class="what">Query time · 500+ users</div>
+        <p>Production RAG Text-to-SQL on Azure with LangChain, prompt engineering and ADK agent orchestration.</p>
+      </div>
+      <div class="impact-card tilt reveal">
+        <div class="num count" data-val="20" data-prefix="A$" data-suffix="K">A$0K</div>
+        <div class="what">First Prize · CSIRO</div>
+        <p>Won a CSIRO innovation program with an AI-powered app supporting plant-based meat and sustainable consumption.</p>
+      </div>
+      <div class="impact-card tilt reveal">
+        <div class="num count" data-val="2">0</div>
+        <div class="what">First-author papers</div>
+        <p>Peer-reviewed publications on AI evaluation and AI-driven productivity (Springer CCIS; CS&amp;IT).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <div class="fig reveal">FIG. 03 — EXPERIENCE</div>
+    <h2 class="section-title reveal">Where the work happened</h2>
+    <div class="xp">
+
+      <div class="xp-item reveal">
+        <div class="when">MAR 2024 — SEP 2024</div>
+        <h3>Data and AI Specialist</h3>
+        <div class="org">Telstra · Brisbane</div>
+        <ul>
+          <li>Co-developed <b>AgentEval with Microsoft Research</b> — beat Google's G-Eval baseline by 20% on agent reliability metrics.</li>
+          <li>Architected a production <b>RAG Text-to-SQL</b> app (LangChain, prompt engineering, ADK) on Azure for 500+ enterprise users.</li>
+          <li>Designed the PGI data-quality framework (35% accuracy gains); production monitoring &amp; observability; co-authored 2 papers.</li>
+        </ul>
+      </div>
+
+      <div class="xp-item reveal">
+        <div class="when">2022 — 2026</div>
+        <h3>Machine Learning Engineer / Data Consultant</h3>
+        <div class="org">GVTL · Vietnam (remote)</div>
+        <ul>
+          <li>Built the internal pipeline managing stainless-steel inventory — stock tracking, demand planning, procurement support.</li>
+          <li>Developed a <b>Temporal Fusion Transformer</b> model forecasting steel prices — <b>~A$1.2M saved</b> across five years.</li>
+          <li>Owned the full lifecycle in Python: ingestion, features, training, deployment, monitoring of a live operational system.</li>
+        </ul>
+      </div>
+
+      <div class="xp-item reveal">
+        <div class="when">JUL 2022 — PRESENT</div>
+        <h3>Casual Lecturer · Subject Coordinator (DATA5000)</h3>
+        <div class="org">Kaplan Business School · QUT · JCU · CQU</div>
+        <ul>
+          <li>Designed curriculum, assessments and rubrics for a postgraduate AI programming unit as Subject Coordinator.</li>
+          <li>Lectured 13+ units across ML, deep learning, NLP, statistics and data communication; 2024 QUT Teaching Advantage Program.</li>
+        </ul>
+      </div>
+
+      <div class="xp-item reveal">
+        <div class="when">JAN 2023 — MAY 2023</div>
+        <h3>Machine Learning Engineer</h3>
+        <div class="org">Prooftec · Sydney (remote)</div>
+        <ul>
+          <li>Production ML pipelines on AWS with dbt SQL transformations; Docker, CI/CD, automated retraining and monitoring.</li>
+        </ul>
+      </div>
+
+      <div class="xp-item reveal">
+        <div class="when">OCT 2021 — OCT 2022</div>
+        <h3>Data Scientist</h3>
+        <div class="org">Orefox · Brisbane</div>
+        <ul>
+          <li>Predictive models on geospatial data (+20% viable site identification); NLP search engine over regulatory documents (−30% retrieval time).</li>
+        </ul>
+      </div>
+
+      <div class="xp-item reveal">
+        <div class="when">NOV 2021 — SEP 2022</div>
+        <h3>Junior Software Developer</h3>
+        <div class="org">Explorate · Brisbane</div>
+        <ul>
+          <li>Production REST APIs on AWS — 10K+ daily requests at 99.9% uptime; document OCR automation with Textract.</li>
+        </ul>
+      </div>
+
+      <div class="xp-item reveal">
+        <div class="when">NOV 2021 — AUG 2022</div>
+        <h3>Research Assistant (×2 contracts)</h3>
+        <div class="org">QUT · Brisbane</div>
+        <ul>
+          <li>Reinforcement learning in recommender systems; deep matrix factorisation for social-media text classification.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="fig reveal">FIG. 04 — CAPABILITIES</div>
+    <h2 class="section-title reveal">Tools of the trade</h2>
+    <div class="skill-groups">
+      <div class="skill-group reveal">
+        <h4>AI / GenAI</h4>
+        <div class="chips">
+          <span class="chip hot">LLMs</span><span class="chip hot">RAG</span><span class="chip hot">Agentic AI</span>
+          <span class="chip">LangChain</span><span class="chip">Pydantic</span><span class="chip">ADK</span>
+          <span class="chip">Prompt engineering</span><span class="chip hot">AI evaluation</span>
+          <span class="chip">Hallucination mitigation</span><span class="chip">Responsible AI</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Machine Learning</h4>
+        <div class="chips">
+          <span class="chip hot">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">Scikit-learn</span>
+          <span class="chip hot">TFT / time-series</span><span class="chip">Gradient boosting</span>
+          <span class="chip">NLP</span><span class="chip">Deep learning</span><span class="chip">Recommender systems</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Engineering &amp; Cloud</h4>
+        <div class="chips">
+          <span class="chip hot">Python</span><span class="chip hot">SQL</span><span class="chip">R</span><span class="chip">C/C++</span>
+          <span class="chip">Azure</span><span class="chip">AWS</span><span class="chip">Docker</span>
+          <span class="chip">CI/CD</span><span class="chip">MLflow</span><span class="chip">dbt</span><span class="chip">PySpark</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Data &amp; Communication</h4>
+        <div class="chips">
+          <span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Power BI</span>
+          <span class="chip">Tableau</span><span class="chip">Dimensional modelling</span>
+          <span class="chip hot">Teaching &amp; storytelling</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PERSONAL PROJECT ================= -->
+<section id="project">
+  <div class="wrap">
+    <div class="fig reveal">FIG. 05 — PERSONAL PROJECT</div>
+    <h2 class="section-title reveal">The machine that makes the videos</h2>
+    <div class="project-card reveal">
+      <div class="project-copy">
+        <div class="tag">Founder &amp; Creator · 2025 — present</div>
+        <h3>AI-Powered YouTube Content Channel</h3>
+        <p>
+          An agentic AI pipeline that produces video content end-to-end — no camera crew,
+          no editor, no studio. One orchestrated system, from idea to upload.
+        </p>
+        <ul>
+          <li><b>LLM script generation</b> — story and narration written by language models with structured prompting.</li>
+          <li><b>Voice synthesis</b> — natural narration generated programmatically.</li>
+          <li><b>Automated animation</b> — visuals rendered by code and composited automatically.</li>
+          <li><b>Tool orchestration</b> — every stage wired together in Python as a single production pipeline.</li>
+        </ul>
+      </div>
+      <div class="project-media">
+        <!-- PROJECT PHOTO: sửa CONFIG -->
+        <div class="media-slot" id="project-photo-slot">
+          <div class="media-ph" id="project-photo-ph">
+            <span class="nosignal">NO SIGNAL</span>
+            <span>PROJECT PHOTO FEED<br>— set CONFIG.projectPhoto —</span>
+          </div>
+        </div>
+        <!-- PROJECT VIDEO: điền YouTube ID vào CONFIG -->
+        <div class="media-slot" id="project-video-slot">
+          <div class="media-ph" id="project-video-ph">
+            <span class="nosignal">NO SIGNAL</span>
+            <span>VIDEO FEED<br>— set CONFIG.youtubeVideoId —</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PUBLICATIONS ================= -->
+<section id="publications">
+  <div class="wrap">
+    <div class="fig reveal">FIG. 06 — PUBLICATIONS (FIRST AUTHOR)</div>
+    <h2 class="section-title reveal">On the record</h2>
+    <div class="pub reveal">
+      <div class="meta">SPRINGER CCIS VOL. 2325 · AUSDM 2024 · DOI: 10.1007/978-981-95-6888-8_1</div>
+      <h4>Generative Agents as Reliable Proxies for Human Evaluation of AI-Generated Content</h4>
+      <p>Vu, T., Nayak, R., &amp; Balasubramaniam, T. (2026) — can AI agents be trusted to judge AI output? A framework and evidence.</p>
+    </div>
+    <div class="pub reveal">
+      <div class="meta">CS &amp; IT VOL. 14, NO. 24 · DOI: 10.5121/csit.2024.142402</div>
+      <h4>Improved Productivity with AI Models for SQL Tasks: A Case Study</h4>
+      <p>Vu, T., Keretna, S., Nayak, R., &amp; Balasubramaniam, T. (2024) — measuring real productivity gains when AI assists enterprise SQL work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION & AWARDS ================= -->
+<section id="education">
+  <div class="wrap">
+    <div class="fig reveal">FIG. 07 — EDUCATION &amp; RECOGNITION</div>
+    <h2 class="section-title reveal">Foundations</h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="when">APR 2022 — 2026 (LODGED)</div>
+        <h4>PhD, Computer Science — QUT</h4>
+        <p>QUT RPA Stipend Scholarship (competitive merit-based). Thesis on responsible AI and recommender systems — five PyTorch architectures including an agentic LLM with hallucination mitigation. Supervisor: Prof. Richi Nayak.</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="when">FEB 2020 — OCT 2021</div>
+        <h4>Master of Information Technology — QUT</h4>
+        <p>GPA 6.5 / 7.0 (High Distinction) · Dean's List 2020 &amp; 2021.</p>
+        <div class="award">
+          <div class="medal">★</div>
+          <p><b>First Prize &amp; A$20,000</b> — CSIRO innovation program, AI app for plant-based meat &amp; sustainable consumption.</p>
+        </div>
+        <div class="award">
+          <div class="medal">★</div>
+          <p><b>2024 QUT Teaching Advantage Program</b> — professional teaching certification.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's build something that ships.</h2>
+    <p>Brisbane, Australia · open to AI engineering, data science &amp; research roles</p>
+    <div class="foot-links">
+      <a class="btn primary" href="mailto:thanh31596000@gmail.com">thanh31596000@gmail.com</a>
+      <a class="btn ghost" href="tel:+61476182529">+61 476 182 529</a>
+      <a class="btn amber" href="https://github.com/thanh31596" target="_blank" rel="noopener">github.com/thanh31596 ↗</a>
+    </div>
+    <div class="statusbar">
+      <span><span class="ok">●</span> SYS ONLINE</span>
+      <span>MODELS SHIPPED <b>5+</b></span>
+      <span>PAPERS <b>2</b></span>
+      <span>FIG. 08 — BUILT BY HAND IN BRISBANE</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIG — Anh chỉ cần sửa 3 dòng dưới đây:
+
+   1. profilePhoto : tên file ảnh chân dung (vd "profile.jpg")
+                     — đặt file ảnh cùng thư mục với file HTML này,
+                     hoặc dán link ảnh online (https://...).
+   2. projectPhoto : ảnh cho personal project (vd "project.jpg").
+   3. youtubeVideoId : ID video YouTube.
+                     VD link youtube.com/watch?v=AbCdEf12345
+                     thì ID là "AbCdEf12345".
+
+   Để trống ("") thì màn hình "NO SIGNAL" sẽ hiển thị thay.
+   ============================================================ */
+const CONFIG = {
+  profilePhoto: "",
+  projectPhoto: "",
+  youtubeVideoId: ""
+};
+
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- media mounting ---------- */
+function mountImage(slotId, phId, src, alt){
+  if(!src) return;
+  const img = new Image();
+  img.alt = alt;
+  img.onload = function(){
+    document.getElementById(phId).style.display = "none";
+    document.getElementById(slotId).appendChild(img);
+  };
+  img.src = src;
+}
+mountImage("portrait", "portrait-ph", CONFIG.profilePhoto, "Stephen Kim portrait");
+mountImage("project-photo-slot", "project-photo-ph", CONFIG.projectPhoto, "AI video pipeline project");
+
+if(CONFIG.youtubeVideoId){
+  document.getElementById("project-video-ph").style.display = "none";
+  const iframe = document.createElement("iframe");
+  iframe.src = "https://www.youtube.com/embed/" + CONFIG.youtubeVideoId;
+  iframe.title = "Stephen Kim — AI video pipeline demo";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+  iframe.allowFullscreen = true;
+  document.getElementById("project-video-slot").appendChild(iframe);
+}
+
+/* ---------- neural-network canvas ---------- */
+(function(){
+  const canvas = document.getElementById('net');
+  const ctx = canvas.getContext('2d');
+  let W, H, parts = [];
+  const mouse = {x:-99999, y:-99999};
+  const DPR = Math.min(devicePixelRatio || 1, 2);
+
+  function size(){
+    W = canvas.width = innerWidth * DPR;
+    H = canvas.height = innerHeight * DPR;
+    canvas.style.width = innerWidth + 'px';
+    canvas.style.height = innerHeight + 'px';
+  }
+  function init(){
+    const n = innerWidth < 700 ? 42 : 88;
+    parts = [];
+    for(let i = 0; i < n; i++){
+      parts.push({
+        x: Math.random()*W, y: Math.random()*H,
+        vx: (Math.random()-.5)*.22*DPR, vy: (Math.random()-.5)*.22*DPR,
+        r: (Math.random()*1.4+.8)*DPR,
+        amber: Math.random() < .12
+      });
+    }
+  }
+  size(); init();
+  addEventListener('resize', function(){ size(); init(); });
+  addEventListener('pointermove', function(e){ mouse.x = e.clientX*DPR; mouse.y = e.clientY*DPR; });
+  addEventListener('pointerleave', function(){ mouse.x = -99999; mouse.y = -99999; });
+
+  const LINK = 130*DPR, MR = 150*DPR;
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of parts){
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < 0 || p.x > W) p.vx *= -1;
+      if(p.y < 0 || p.y > H) p.vy *= -1;
+      const dx = p.x-mouse.x, dy = p.y-mouse.y, d = Math.hypot(dx,dy);
+      if(d < MR && d > 0){ p.x += dx/d*.7; p.y += dy/d*.7; }
+    }
+    ctx.lineWidth = 1;
+    for(let i = 0; i < parts.length; i++){
+      for(let j = i+1; j < parts.length; j++){
+        const a = parts[i], b = parts[j];
+        const dx = a.x-b.x, dy = a.y-b.y, d = Math.hypot(dx,dy);
+        if(d < LINK){
+          ctx.strokeStyle = 'rgba(56,225,255,' + (0.13*(1-d/LINK)).toFixed(3) + ')';
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    for(const p of parts){
+      ctx.fillStyle = p.amber ? 'rgba(255,180,84,.85)' : 'rgba(56,225,255,.7)';
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill();
+    }
+    if(!RM) requestAnimationFrame(frame);
+  }
+  frame(); /* draws one static frame even with reduced motion */
+})();
+
+/* ---------- boot line + role typewriter ---------- */
+(function(){
+  const bootEl = document.getElementById('boot-text');
+  const typerEl = document.getElementById('typer');
+  const bootStr = '> stephen.kim --init ... systems online';
+  const roles = [
+    'agentic AI systems.',
+    'evaluation frameworks for AI.',
+    'forecasting that pays for itself.',
+    'production RAG pipelines.',
+    'models that survive contact with reality.'
+  ];
+  if(RM){
+    bootEl.textContent = bootStr;
+    typerEl.textContent = roles[0];
+    return;
+  }
+  let bi = 0;
+  (function bootType(){
+    if(bi <= bootStr.length){
+      bootEl.textContent = bootStr.slice(0, bi++);
+      setTimeout(bootType, 26);
+    } else { roleLoop(); }
+  })();
+  let ri = 0, ci = 0, deleting = false;
+  function roleLoop(){
+    const word = roles[ri];
+    if(!deleting){
+      typerEl.textContent = word.slice(0, ++ci);
+      if(ci === word.length){ deleting = true; setTimeout(roleLoop, 1700); return; }
+      setTimeout(roleLoop, 46);
+    } else {
+      typerEl.textContent = word.slice(0, --ci);
+      if(ci === 0){ deleting = false; ri = (ri+1)%roles.length; setTimeout(roleLoop, 350); return; }
+      setTimeout(roleLoop, 22);
+    }
+  }
+})();
+
+/* ---------- count-up metrics ---------- */
+function animateCount(el){
+  const val = parseFloat(el.dataset.val);
+  const dec = +(el.dataset.decimals || 0);
+  const pre = el.dataset.prefix || '';
+  const suf = el.dataset.suffix || '';
+  if(RM){ el.textContent = pre + val.toFixed(dec) + suf; return; }
+  const t0 = performance.now(), dur = 1500;
+  function f(t){
+    const k = Math.min((t-t0)/dur, 1);
+    const e = 1 - Math.pow(1-k, 3);
+    el.textContent = pre + (val*e).toFixed(dec) + suf;
+    if(k < 1) requestAnimationFrame(f);
+  }
+  requestAnimationFrame(f);
+}
+
+/* ---------- scroll reveals ---------- */
+(function(){
+  const revealEls = document.querySelectorAll('.reveal');
+  if(RM){
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('.count').forEach(animateCount);
+    return;
+  }
+  const counted = new Set();
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        en.target.classList.add('in');
+        en.target.querySelectorAll('.count').forEach(function(c){
+          if(!counted.has(c)){ counted.add(c); animateCount(c); }
+        });
+        if(en.target.classList.contains('count') && !counted.has(en.target)){
+          counted.add(en.target); animateCount(en.target);
+        }
+        io.unobserve(en.target);
+      }
+    });
+  }, {threshold:.16});
+  revealEls.forEach(function(el){ io.observe(el); });
+})();
+
+/* ---------- 3D tilt on impact cards (fine pointers only) ---------- */
+(function(){
+  if(RM || !matchMedia('(pointer:fine)').matches) return;
+  document.querySelectorAll('.tilt').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left)/r.width - .5;
+      const y = (e.clientY - r.top)/r.height - .5;
+      card.style.transform = 'perspective(700px) rotateY(' + (x*6).toFixed(2) + 'deg) rotateX(' + (-y*6).toFixed(2) + 'deg) translateY(-3px)';
+    });
+    card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
+  });
+})();
+</script>
+
+</body>
+</html>
