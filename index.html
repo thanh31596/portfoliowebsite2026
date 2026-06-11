@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stephen Kim — AI Engineer & Data Scientist</title>
-<meta name="description" content="Stephen Kim — AI Engineer / Data Scientist in Brisbane. Builder of production AI: AgentEval with Microsoft Research, TFT forecasting, RAG, agentic pipelines.">
+<meta name="description" content="Stephen Kim — 5 years+ AI Engineer / Data Scientist in Brisbane. Builder of production AI: AgentEval with Microsoft Research, TFT forecasting, RAG, agentic pipelines.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -336,6 +336,54 @@ footer p{color:var(--dim);margin-top:12px}
   .btn:hover,.impact-card{transform:none!important}
   .reveal{opacity:1;transform:none;transition:none}
 }
+
+/* ---------- data console ---------- */
+.console-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:840px){.console-grid{grid-template-columns:1fr}}
+.panel{border:1px solid var(--circuit-faint);border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(10px);padding:18px 18px 14px;transition:border-color .2s,box-shadow .2s}
+.panel:hover{border-color:var(--circuit-dim);box-shadow:0 0 26px rgba(56,225,255,.07)}
+.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.panel-title{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--circuit)}
+.panel-sub{font-family:var(--font-mono);font-size:.62rem;color:var(--dim);letter-spacing:.05em;margin-top:3px;line-height:1.6}
+.panel-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ctl-btn{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.06em;color:var(--dim);background:none;border:1px solid var(--circuit-faint);border-radius:999px;padding:4px 12px;cursor:pointer;transition:all .15s}
+.ctl-btn:hover{color:var(--circuit);border-color:var(--circuit-dim)}
+.ctl-btn.active{color:var(--circuit);border-color:var(--circuit);box-shadow:0 0 10px var(--circuit-faint)}
+.ctl-range{accent-color:var(--signal);width:110px}
+.ctl-label{font-family:var(--font-mono);font-size:.62rem;color:var(--dim)}
+.panel canvas{width:100%!important;height:230px!important}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.stat-tile{flex:1;min-width:90px;border:1px solid var(--circuit-faint);border-radius:9px;padding:10px 12px;background:rgba(8,16,30,.6)}
+.stat-tile .v{font-family:var(--font-display);font-weight:700;font-size:1.25rem;color:var(--signal)}
+.stat-tile .k{font-family:var(--font-mono);font-size:.6rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.gh-repos{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.gh-repos li{font-family:var(--font-mono);font-size:.72rem;color:var(--dim)}
+.gh-repos a{color:var(--paper)}
+.gh-repos a:hover{color:var(--circuit)}
+
+/* ---------- mission timeline carousel ---------- */
+.car-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.car-controls{display:flex;align-items:center;gap:12px}
+.car-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--circuit-dim);background:var(--glass);color:var(--circuit);font-size:1.05rem;cursor:pointer;transition:all .15s;font-family:var(--font-mono);line-height:1}
+.car-btn:hover{border-color:var(--circuit);box-shadow:0 0 14px var(--circuit-faint)}
+.car-count{font-family:var(--font-mono);font-size:.72rem;color:var(--dim);letter-spacing:.14em}
+.car-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 6px;scrollbar-width:none}
+.car-track::-webkit-scrollbar{display:none}
+.car-card{position:relative;flex:0 0 min(330px,84vw);scroll-snap-align:start;border:1px solid var(--circuit-faint);border-top:3px solid var(--circuit);border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(10px);padding:20px 20px 16px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.car-card:hover{box-shadow:0 8px 32px rgba(56,225,255,.08)}
+.ghost-year{position:absolute;top:0;right:10px;font-family:var(--font-display);font-weight:700;font-size:3.1rem;line-height:1.15;color:rgba(56,225,255,.08);pointer-events:none;user-select:none}
+.car-pill{display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid;border-radius:999px;padding:3px 10px;margin-bottom:10px}
+.car-card h3{font-family:var(--font-display);font-size:1.12rem;font-weight:600;line-height:1.25}
+.car-org{font-family:var(--font-mono);font-size:.7rem;color:var(--dim);margin-top:5px;letter-spacing:.04em;line-height:1.6}
+.car-when{font-family:var(--font-mono);font-size:.68rem;color:var(--circuit);margin-top:3px;letter-spacing:.06em}
+.car-card ul{margin:12px 0 0 16px;color:var(--dim);font-size:.88rem;display:flex;flex-direction:column;gap:6px}
+.car-card li::marker{color:var(--circuit)}
+.car-card b{color:var(--paper)}
+.car-dots{display:flex;gap:7px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.car-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--circuit-dim);background:transparent;cursor:pointer;padding:0;transition:all .15s}
+.car-dot.active{background:var(--circuit);box-shadow:0 0 8px var(--circuit-dim)}
+.car-cta{display:inline-block;margin-top:12px;font-family:var(--font-mono);font-size:.74rem;color:var(--signal);border:1px solid var(--signal);border-radius:8px;padding:8px 14px}
+.car-cta:hover{background:var(--signal-soft);text-decoration:none}
 </style>
 </head>
 <body>
@@ -348,6 +396,7 @@ footer p{color:var(--dim);margin-top:12px}
     <nav>
       <ul>
         <li><a href="#impact">Impact</a></li>
+        <li><a href="#console">Console</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#project">Project</a></li>
@@ -381,7 +430,7 @@ footer p{color:var(--dim);margin-top:12px}
         <div class="cta">
           <a class="btn primary" href="mailto:thanh31596000@gmail.com">Get in touch</a>
           <a class="btn ghost" href="https://github.com/thanh31596" target="_blank" rel="noopener">GitHub ↗</a>
-           <a class="btn ghost" href="https://thanh31596.github.io/data/" target="_blank" rel="noopener">My Teaching Porfolio ↗</a>
+          <a class="btn amber" href="https://thanh31596.github.io/data/" target="_blank" rel="noopener">Teaching Portfolio ↗</a>
         </div>
       </div>
 
@@ -464,89 +513,167 @@ footer p{color:var(--dim);margin-top:12px}
   </div>
 </section>
 
-<!-- ================= EXPERIENCE ================= -->
-<section id="experience">
+<!-- ================= DATA CONSOLE ================= -->
+<section id="console">
   <div class="wrap">
-    <div class="fig reveal">FIG. 03 — EXPERIENCE</div>
-    <h2 class="section-title reveal">Where the work happened</h2>
-    <div class="xp">
+    <div class="fig reveal">FIG. 03 — LIVE DATA CONSOLE</div>
+    <h2 class="section-title reveal">Don't take my word for it — touch the data</h2>
+    <div class="console-grid">
 
-      <div class="xp-item reveal">
-        <div class="when">MAR 2024 — SEP 2024</div>
-        <h3>Data and AI Specialist</h3>
-        <div class="org">Telstra · Brisbane</div>
-        <ul>
-          <li>Co-developed <b>AgentEval with Microsoft Research</b> — beat Google's G-Eval baseline by 20% on agent reliability metrics.</li>
-          <li>Architected a production <b>RAG Text-to-SQL</b> app (LangChain, prompt engineering, ADK) on Azure for 500+ enterprise users.</li>
-          <li>Designed the PGI data-quality framework (35% accuracy gains); production monitoring &amp; observability; co-authored 2 papers.</li>
-        </ul>
+      <div class="panel reveal">
+        <div class="panel-head">
+          <div><div class="panel-title">Delivered improvements</div>
+          <div class="panel-sub">measured outcomes across shipped systems (%)</div></div>
+        </div>
+        <canvas id="impactChart"></canvas>
       </div>
 
-      <div class="xp-item reveal">
-        <div class="when">2022 — 2026</div>
-        <h3>Machine Learning Engineer / Data Consultant</h3>
-        <div class="org">GVTL · Vietnam (remote)</div>
-        <ul>
-          <li>Built the internal pipeline managing stainless-steel inventory — stock tracking, demand planning, procurement support.</li>
-          <li>Developed a <b>Temporal Fusion Transformer</b> model forecasting steel prices — <b>~A$1.2M saved</b> across five years.</li>
-          <li>Owned the full lifecycle in Python: ingestion, features, training, deployment, monitoring of a live operational system.</li>
-        </ul>
+      <div class="panel reveal">
+        <div class="panel-head">
+          <div><div class="panel-title">Capability radar</div>
+          <div class="panel-sub">self-assessed — happy to be challenged in an interview</div></div>
+          <div class="panel-controls">
+            <button class="ctl-btn active" id="radarNow">2026</button>
+            <button class="ctl-btn" id="radarThen">2021</button>
+          </div>
+        </div>
+        <canvas id="radarChart"></canvas>
       </div>
 
-      <div class="xp-item reveal">
-        <div class="when">JUL 2022 — PRESENT</div>
-        <h3>Casual Lecturer · Subject Coordinator (DATA5000)</h3>
-        <div class="org">Kaplan Business School · QUT · JCU · CQU</div>
-        <ul>
-          <li>Designed curriculum, assessments and rubrics for a postgraduate AI programming unit as Subject Coordinator.</li>
-          <li>Lectured 13+ units across ML, deep learning, NLP, statistics and data communication; 2024 QUT Teaching Advantage Program.</li>
-        </ul>
+      <div class="panel reveal">
+        <div class="panel-head">
+          <div><div class="panel-title">Forecast playground</div>
+          <div class="panel-sub">illustrative demo — the production version was a Temporal Fusion Transformer forecasting steel prices (GVTL, ~A$1.2M saved)</div></div>
+          <div class="panel-controls">
+            <span class="ctl-label">horizon</span>
+            <input type="range" min="3" max="12" value="6" id="fcHorizon" class="ctl-range">
+            <span class="ctl-label" id="fcLabel">6 mo</span>
+          </div>
+        </div>
+        <canvas id="forecastChart"></canvas>
       </div>
 
-      <div class="xp-item reveal">
-        <div class="when">JAN 2023 — MAY 2023</div>
-        <h3>Machine Learning Engineer</h3>
-        <div class="org">Prooftec · Sydney (remote)</div>
-        <ul>
-          <li>Production ML pipelines on AWS with dbt SQL transformations; Docker, CI/CD, automated retraining and monitoring.</li>
-        </ul>
-      </div>
-
-      <div class="xp-item reveal">
-        <div class="when">OCT 2021 — OCT 2022</div>
-        <h3>Data Scientist</h3>
-        <div class="org">Orefox · Brisbane</div>
-        <ul>
-          <li>Predictive models on geospatial data (+20% viable site identification); NLP search engine over regulatory documents (−30% retrieval time).</li>
-        </ul>
-      </div>
-
-      <div class="xp-item reveal">
-        <div class="when">NOV 2021 — SEP 2022</div>
-        <h3>Junior Software Developer</h3>
-        <div class="org">Explorate · Brisbane</div>
-        <ul>
-          <li>Production REST APIs on AWS — 10K+ daily requests at 99.9% uptime; document OCR automation with Textract.</li>
-        </ul>
-      </div>
-
-      <div class="xp-item reveal">
-        <div class="when">NOV 2021 — AUG 2022</div>
-        <h3>Research Assistant (×2 contracts)</h3>
-        <div class="org">QUT · Brisbane</div>
-        <ul>
-          <li>Reinforcement learning in recommender systems; deep matrix factorisation for social-media text classification.</li>
-        </ul>
+      <div class="panel reveal">
+        <div class="panel-head">
+          <div><div class="panel-title">GitHub telemetry</div>
+          <div class="panel-sub">live from api.github.com — refreshes on every visit</div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-tile"><div class="v" id="ghRepos">&mdash;</div><div class="k">public repos</div></div>
+          <div class="stat-tile"><div class="v" id="ghFollowers">&mdash;</div><div class="k">followers</div></div>
+          <div class="stat-tile"><div class="v" id="ghRecent">&mdash;</div><div class="k">days since last push</div></div>
+        </div>
+        <canvas id="langChart" style="height:150px!important"></canvas>
+        <ul class="gh-repos" id="ghList"></ul>
       </div>
 
     </div>
   </div>
 </section>
 
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <div class="fig reveal">FIG. 04 &mdash; MISSION TIMELINE</div>
+    <div class="car-head reveal">
+      <h2 class="section-title" style="margin-bottom:0">Nine missions, four parallel tracks</h2>
+      <div class="car-controls">
+        <span class="car-count" id="carCount">01 / 09</span>
+        <button class="car-btn" id="carPrev" aria-label="Previous">&#8249;</button>
+        <button class="car-btn" id="carNext" aria-label="Next">&#8250;</button>
+      </div>
+    </div>
+    <div class="car-track reveal" id="carTrack">
+
+        <article class="car-card" style="border-top-color:#FFB454">
+          <div class="ghost-year">NOW</div>
+          <span class="car-pill" style="color:#FFB454;border-color:#FFB454">consulting</span>
+          <h3>Open to the next mission</h3>
+          <div class="car-org">AI Engineer / Data Scientist roles &middot; Brisbane (hybrid or onsite)</div>
+          <div class="car-when" style="color:#FFB454">immediately available</div>
+          <ul><li>Production GenAI &amp; ML, end-to-end data engineering, and a habit of leaving systems better than I found them</li></ul><a class="car-cta" href="mailto:thanh31596000@gmail.com">&#9656; thanh31596000@gmail.com</a>
+        </article>
+
+        <article class="car-card" style="border-top-color:#38E1FF">
+          <div class="ghost-year">2024</div>
+          <span class="car-pill" style="color:#38E1FF;border-color:#38E1FF">industry</span>
+          <h3>Data &amp; AI Specialist</h3>
+          <div class="car-org">Telstra Limited Group &middot; Brisbane</div>
+          <div class="car-when" style="color:#38E1FF">MAR &mdash; SEP 2024</div>
+          <ul><li>Co-developed <b>AgentEval with Microsoft Research</b> &mdash; +20% over Google's G-Eval</li><li>Production <b>RAG Text-to-SQL</b> (LangChain, ADK) on Azure &mdash; &minus;40% query time, 500+ users</li><li>PGI data-quality framework (35% accuracy gains); co-authored 2 papers</li></ul>
+        </article>
+
+        <article class="car-card" style="border-top-color:#FFB454">
+          <div class="ghost-year">2022&ndash;26</div>
+          <span class="car-pill" style="color:#FFB454;border-color:#FFB454">consulting</span>
+          <h3>ML Engineer / Data Consultant</h3>
+          <div class="car-org">GVTL &middot; Vietnam (remote) &middot; 4+ years</div>
+          <div class="car-when" style="color:#FFB454">2022 &mdash; 2026</div>
+          <ul><li><b>Owned core data assets end-to-end</b>: inventory ETL pipeline in daily operation</li><li><b>Temporal Fusion Transformer (PyTorch)</b> steel-price forecasting &mdash; <b>~A$1.2M saved</b></li><li>Full lifecycle: ingestion &rarr; features &rarr; training &rarr; deployment &rarr; monitoring</li></ul>
+        </article>
+
+        <article class="car-card" style="border-top-color:#B48CFF">
+          <div class="ghost-year">2026</div>
+          <span class="car-pill" style="color:#B48CFF;border-color:#B48CFF">research</span>
+          <h3>PhD &mdash; thesis lodged</h3>
+          <div class="car-org">QUT &middot; Prof. Richi Nayak &middot; RPA Stipend Scholarship</div>
+          <div class="car-when" style="color:#B48CFF">2022 &mdash; 2026</div>
+          <ul><li><i>From Data Enrichment to Responsible Recommendations</i></li><li>Five PyTorch architectures incl. an <b>agentic LLM with hallucination mitigation</b></li></ul>
+        </article>
+
+        <article class="car-card" style="border-top-color:#3EE08A">
+          <div class="ghost-year">2022&ndash;</div>
+          <span class="car-pill" style="color:#3EE08A;border-color:#3EE08A">teaching</span>
+          <h3>Casual Lecturer &middot; Subject Coordinator</h3>
+          <div class="car-org">Kaplan &middot; QUT &middot; JCU &middot; CQU</div>
+          <div class="car-when" style="color:#3EE08A">JUL 2022 &mdash; ONGOING</div>
+          <ul><li>13+ units: ML, deep learning, NLP, statistics, data communication</li><li>DATA5000 curriculum, assessments &amp; rubrics; 2024 QUT Teaching Advantage Program</li></ul>
+        </article>
+
+        <article class="car-card" style="border-top-color:#38E1FF">
+          <div class="ghost-year">2023</div>
+          <span class="car-pill" style="color:#38E1FF;border-color:#38E1FF">industry</span>
+          <h3>Machine Learning Engineer</h3>
+          <div class="car-org">Prooftec &middot; Sydney (remote)</div>
+          <div class="car-when" style="color:#38E1FF">JAN &mdash; MAY 2023</div>
+          <ul><li>Scalable production <b>ETL pipelines</b> (dbt on AWS); automated testing &amp; lineage</li><li><b>Docker + CI/CD</b>; automated retraining; 10% infra cost cut</li></ul>
+        </article>
+
+        <article class="car-card" style="border-top-color:#38E1FF">
+          <div class="ghost-year">2021&ndash;22</div>
+          <span class="car-pill" style="color:#38E1FF;border-color:#38E1FF">industry</span>
+          <h3>Data Scientist</h3>
+          <div class="car-org">Orefox Limited Co &middot; Brisbane</div>
+          <div class="car-when" style="color:#38E1FF">OCT 2021 &mdash; OCT 2022</div>
+          <ul><li>Predictive models over <b>geospatial data</b> (PostGIS) &mdash; +20% site identification</li><li><b>NLP</b> information-extraction engine &mdash; 30% faster retrieval</li></ul>
+        </article>
+
+        <article class="car-card" style="border-top-color:#38E1FF">
+          <div class="ghost-year">2021&ndash;22</div>
+          <span class="car-pill" style="color:#38E1FF;border-color:#38E1FF">industry</span>
+          <h3>Junior Software Developer</h3>
+          <div class="car-org">Explorate &middot; Brisbane</div>
+          <div class="car-when" style="color:#38E1FF">NOV 2021 &mdash; SEP 2022</div>
+          <ul><li>Production <b>REST APIs</b> on AWS &mdash; 10K+ daily requests, 99.9% uptime</li><li>Document OCR automation with Textract</li></ul>
+        </article>
+
+        <article class="car-card" style="border-top-color:#B48CFF">
+          <div class="ghost-year">2021&ndash;22</div>
+          <span class="car-pill" style="color:#B48CFF;border-color:#B48CFF">research</span>
+          <h3>Research Assistant &times;2</h3>
+          <div class="car-org">QUT &middot; Brisbane</div>
+          <div class="car-when" style="color:#B48CFF">NOV 2021 &mdash; AUG 2022</div>
+          <ul><li>RL in recommender systems; deep matrix factorisation for text classification</li></ul>
+        </article>
+    </div>
+    <div class="car-dots" id="carDots"></div>
+  </div>
+</section>
+
 <!-- ================= SKILLS ================= -->
 <section id="skills">
   <div class="wrap">
-    <div class="fig reveal">FIG. 04 — CAPABILITIES</div>
+    <div class="fig reveal">FIG. 05 — CAPABILITIES</div>
     <h2 class="section-title reveal">Tools of the trade</h2>
     <div class="skill-groups">
       <div class="skill-group reveal">
@@ -589,7 +716,7 @@ footer p{color:var(--dim);margin-top:12px}
 <!-- ================= PERSONAL PROJECT ================= -->
 <section id="project">
   <div class="wrap">
-    <div class="fig reveal">FIG. 05 — PERSONAL PROJECT</div>
+    <div class="fig reveal">FIG. 06 — PERSONAL PROJECT</div>
     <h2 class="section-title reveal">The machine that makes the videos</h2>
     <div class="project-card reveal">
       <div class="project-copy">
@@ -629,7 +756,7 @@ footer p{color:var(--dim);margin-top:12px}
 <!-- ================= PUBLICATIONS ================= -->
 <section id="publications">
   <div class="wrap">
-    <div class="fig reveal">FIG. 06 — PUBLICATIONS (FIRST AUTHOR)</div>
+    <div class="fig reveal">FIG. 07 — PUBLICATIONS (FIRST AUTHOR)</div>
     <h2 class="section-title reveal">On the record</h2>
     <div class="pub reveal">
       <div class="meta">SPRINGER CCIS VOL. 2325 · AUSDM 2024 · DOI: 10.1007/978-981-95-6888-8_1</div>
@@ -647,7 +774,7 @@ footer p{color:var(--dim);margin-top:12px}
 <!-- ================= EDUCATION & AWARDS ================= -->
 <section id="education">
   <div class="wrap">
-    <div class="fig reveal">FIG. 07 — EDUCATION &amp; RECOGNITION</div>
+    <div class="fig reveal">FIG. 08 — EDUCATION &amp; RECOGNITION</div>
     <h2 class="section-title reveal">Foundations</h2>
     <div class="edu-grid">
       <div class="edu-card reveal">
@@ -686,7 +813,7 @@ footer p{color:var(--dim);margin-top:12px}
       <span><span class="ok">●</span> SYS ONLINE</span>
       <span>MODELS SHIPPED <b>5+</b></span>
       <span>PAPERS <b>2</b></span>
-      <span>FIG. 08 — BUILT BY HAND IN BRISBANE</span>
+      <span>FIG. 09 — BUILT BY HAND IN BRISBANE</span>
     </div>
   </div>
 </footer>
@@ -705,11 +832,7 @@ footer p{color:var(--dim);margin-top:12px}
 
    Để trống ("") thì màn hình "NO SIGNAL" sẽ hiển thị thay.
    ============================================================ */
-const CONFIG = {
-  profilePhoto: "logo_porfolio.png",
-  projectPhoto: "WEB.png",
-  youtubeVideoId: "0MGtZvJ-spQ"
-};
+const CONFIG = { profilePhoto: "logo_porfolio.png", projectPhoto: "WEB.png", youtubeVideoId: "0MGtZvJ-spQ" };
 
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -896,5 +1019,149 @@ function animateCount(el){
 })();
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+  if(typeof Chart === "undefined") return;
+  var CIRCUIT="#38E1FF", SIGNAL="#FFB454", DIM="#93A7BC", GRID="rgba(56,225,255,.08)";
+  Chart.defaults.font.family="'IBM Plex Mono',monospace";
+  Chart.defaults.font.size=10;
+  Chart.defaults.color=DIM;
+  var RM2=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(RM2) Chart.defaults.animation=false;
+
+  /* 1 — delivered improvements */
+  new Chart(document.getElementById('impactChart'),{
+    type:'bar',
+    data:{labels:['AgentEval vs G-Eval','Query time cut (RAG)','PGI accuracy gain','Mining site ID lift','Doc retrieval cut'],
+      datasets:[{data:[20,40,35,20,30],
+        backgroundColor:['rgba(56,225,255,.55)','rgba(255,180,84,.55)','rgba(56,225,255,.55)','rgba(56,225,255,.55)','rgba(255,180,84,.55)'],
+        borderColor:[CIRCUIT,SIGNAL,CIRCUIT,CIRCUIT,SIGNAL],borderWidth:1.5,borderRadius:4}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:function(c){return c.parsed.x+'% improvement';}}}},
+      scales:{x:{grid:{color:GRID},ticks:{callback:function(v){return v+'%';}}},y:{grid:{display:false}}}}
+  });
+
+  /* 2 — capability radar with 2021/2026 toggle */
+  var axes=['GenAI / LLMs','Deep Learning','Data Engineering','Cloud / MLOps','Statistics','Communication'];
+  var nowD=[95,90,85,82,86,92], thenD=[35,55,40,30,70,75];
+  var radar=new Chart(document.getElementById('radarChart'),{
+    type:'radar',
+    data:{labels:axes,datasets:[{data:nowD,borderColor:CIRCUIT,backgroundColor:'rgba(56,225,255,.16)',pointBackgroundColor:CIRCUIT,borderWidth:2}]},
+    options:{plugins:{legend:{display:false}},
+      scales:{r:{min:0,max:100,grid:{color:GRID},angleLines:{color:GRID},pointLabels:{color:DIM,font:{size:9}},ticks:{display:false}}}}
+  });
+  function setRadar(d,col,bg,onId,offId){
+    radar.data.datasets[0].data=d;
+    radar.data.datasets[0].borderColor=col;
+    radar.data.datasets[0].backgroundColor=bg;
+    radar.data.datasets[0].pointBackgroundColor=col;
+    radar.update();
+    document.getElementById(onId).classList.add('active');
+    document.getElementById(offId).classList.remove('active');
+  }
+  document.getElementById('radarNow').onclick=function(){setRadar(nowD,CIRCUIT,'rgba(56,225,255,.16)','radarNow','radarThen');};
+  document.getElementById('radarThen').onclick=function(){setRadar(thenD,SIGNAL,'rgba(255,180,84,.16)','radarThen','radarNow');};
+
+  /* 3 — forecast playground */
+  var hist=[],labels=[],v=100;
+  for(var i=0;i<30;i++){
+    v=v+Math.sin(i/4.5)*2.2+(((i*9301+49297)%233280)/233280-0.5)*4+0.55;
+    hist.push(Math.round(v*10)/10);labels.push('m'+(i+1));
+  }
+  var fc=null;
+  function buildForecast(h){
+    var last=hist[hist.length-1];
+    var trend=(hist[hist.length-1]-hist[hist.length-7])/6;
+    var mid=[],up=[],lo=[],labs=labels.slice();
+    for(var k=1;k<=h;k++){
+      var m=last+trend*k, band=1.8*Math.sqrt(k);
+      mid.push(Math.round(m*10)/10);up.push(Math.round((m+band)*10)/10);lo.push(Math.round((m-band)*10)/10);
+      labs.push('+'+k);
+    }
+    var pad=new Array(hist.length-1).fill(null);
+    return {labs:labs, mid:pad.concat([last]).concat(mid), up:pad.concat([last]).concat(up), lo:pad.concat([last]).concat(lo)};
+  }
+  function renderForecast(h){
+    var f=buildForecast(h);
+    if(fc)fc.destroy();
+    fc=new Chart(document.getElementById('forecastChart'),{
+      type:'line',
+      data:{labels:f.labs,datasets:[
+        {data:hist,borderColor:CIRCUIT,borderWidth:2,pointRadius:0,tension:.35},
+        {data:f.up,borderColor:'transparent',backgroundColor:'rgba(255,180,84,.12)',pointRadius:0,fill:'+2'},
+        {data:f.mid,borderColor:SIGNAL,borderDash:[6,4],borderWidth:2,pointRadius:0,tension:.3},
+        {data:f.lo,borderColor:'transparent',pointRadius:0}
+      ]},
+      options:{plugins:{legend:{display:false}},interaction:{intersect:false,mode:'index'},
+        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8}},y:{grid:{color:GRID}}}}
+    });
+  }
+  renderForecast(6);
+  var slider=document.getElementById('fcHorizon');
+  slider.addEventListener('input',function(){
+    document.getElementById('fcLabel').textContent=slider.value+' mo';
+    renderForecast(+slider.value);
+  });
+
+  /* 4 — live github telemetry */
+  fetch('https://api.github.com/users/thanh31596').then(function(r){return r.json();}).then(function(u){
+    if(u && typeof u.public_repos==='number'){
+      document.getElementById('ghRepos').textContent=u.public_repos;
+      document.getElementById('ghFollowers').textContent=u.followers;
+    }
+  }).catch(function(){});
+  fetch('https://api.github.com/users/thanh31596/repos?per_page=100&sort=pushed').then(function(r){return r.json();}).then(function(rs){
+    if(!Array.isArray(rs)||!rs.length)return;
+    var days=Math.max(0,Math.round((Date.now()-new Date(rs[0].pushed_at))/86400000));
+    document.getElementById('ghRecent').textContent=days;
+    var langs={};
+    rs.forEach(function(r){if(r.language)langs[r.language]=(langs[r.language]||0)+1;});
+    var entries=Object.keys(langs).map(function(k){return [k,langs[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+    new Chart(document.getElementById('langChart'),{type:'doughnut',
+      data:{labels:entries.map(function(e){return e[0];}),
+        datasets:[{data:entries.map(function(e){return e[1];}),
+          backgroundColor:['rgba(56,225,255,.7)','rgba(255,180,84,.7)','rgba(56,225,255,.4)','rgba(255,180,84,.4)','rgba(147,167,188,.5)'],
+          borderColor:'#060B14',borderWidth:2}]},
+      options:{plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:9}}}},cutout:'62%'}});
+    var list=document.getElementById('ghList');
+    rs.slice(0,3).forEach(function(r){
+      var li=document.createElement('li');
+      li.innerHTML='&#9656; <a href="'+r.html_url+'" target="_blank" rel="noopener">'+r.name+'</a> &mdash; pushed '+new Date(r.pushed_at).toISOString().slice(0,10);
+      list.appendChild(li);
+    });
+  }).catch(function(){
+    document.getElementById('ghList').innerHTML='<li>telemetry offline</li>';
+  });
+})();
+</script>
+<script>
+(function(){
+  var track=document.getElementById('carTrack'); if(!track) return;
+  var cards=track.querySelectorAll('.car-card');
+  var dotsWrap=document.getElementById('carDots'), counter=document.getElementById('carCount');
+  var RMc=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  cards.forEach(function(cd,i){
+    var d=document.createElement('button');
+    d.className='car-dot'; d.setAttribute('aria-label','Go to card '+(i+1));
+    d.onclick=function(){go(i);};
+    dotsWrap.appendChild(d);
+  });
+  var dots=dotsWrap.children;
+  function cardW(){return cards[0].getBoundingClientRect().width+16;}
+  function idx(){return Math.min(cards.length-1,Math.max(0,Math.round(track.scrollLeft/cardW())));}
+  function paint(){
+    var i=idx();
+    counter.textContent=('0'+(i+1)).slice(-2)+' / '+('0'+cards.length).slice(-2);
+    for(var k=0;k<dots.length;k++) dots[k].classList.toggle('active',k===i);
+  }
+  function go(i){track.scrollTo({left:Math.max(0,Math.min(cards.length-1,i))*cardW(),behavior:RMc?'auto':'smooth'});}
+  document.getElementById('carPrev').onclick=function(){go(idx()-1);};
+  document.getElementById('carNext').onclick=function(){go(idx()+1);};
+  track.addEventListener('scroll',function(){requestAnimationFrame(paint);});
+  addEventListener('resize',paint);
+  paint();
+})();
+</script>
 </body>
 </html>
